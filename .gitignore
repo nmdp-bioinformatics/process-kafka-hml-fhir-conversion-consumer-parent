@@ -17,6 +17,7 @@
 *.zip
 *.tar.gz
 *.rar
+*.iml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -24,3 +25,8 @@ hs_err_pid*
 .idea/
 
 target/
+hml-fhir-mongo/
+kafka-consumer/
+process-kafka-hml-fhir-conversion-consumer/
+service-hml-fhir-converter-models/
+service-kafka-producer-model/

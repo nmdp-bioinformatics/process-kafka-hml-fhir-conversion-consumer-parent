@@ -29,13 +29,75 @@
 
     <groupId>org.nmdp</groupId>
     <artifactId>process-hml-fhir-kafka-consumer</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
 	<modules>
-		<module>mongo</module>
-		<module>converter</module>
-		<module>api-models</module>
-		<module>kafka-models</module>
+		<module>service-hml-fhir-converter-models</module>
+		<module>service-kafka-producer-model</module>
+		<module>hml-fhir-mongo</module>
+		<module>kafka-consumer</module>
+		<module>process-kafka-hml-fhir-conversion-consumer</module>
 	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<autoVersionSubmodules>false</autoVersionSubmodules>
+						<useReleaseProfile>false</useReleaseProfile>
+						<releaseProfile>release</releaseProfile>
+						<goals>deploy</goals>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<classpathPrefix>lib/</classpathPrefix>
+								<mainClass>org.nmdp.kafkahmlfhirconversionconsumer.KafkaHmlFhirConversionConsumer</mainClass>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.nmdp</groupId>
+				<artifactId>process-hml-fhir-conversion-kafka-consumer</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.nmdp</groupId>
+				<artifactId>kafka-consumer</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.nmdp</groupId>
+				<artifactId>hml-fhir-mongo</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.nmdp</groupId>
+				<artifactId>hml-fhir</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.nmdp</groupId>
+				<artifactId>service-hml-fhir-converter-models</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.nmdp</groupId>
+				<artifactId>service-kafka-producer-model</artifactId>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
